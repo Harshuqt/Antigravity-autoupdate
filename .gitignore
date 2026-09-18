@@ -1,0 +1,19 @@
+# Logs and caches
+*.log
+.cache/
+/tmp/
+
+# IDE and Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# Antigravity/Gemini configuration (if applicable)
+.gemini/
+
+# Temporary update directories (just in case they are run locally instead of /tmp)
+antigravity_update/
+Antigravity-x64/
+*.tar.gz
