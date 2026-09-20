@@ -29,12 +29,19 @@ While building this automation script, I overcame several interesting technical 
    cd Antigravity-autoupdate
    ```
 
-2. **Run the updater:**
+2. **Run the initial setup:**
+   For the very first time, run the installation script. This will download Antigravity and automatically create a handy shortcut on your Desktop and in your application launcher, complete with the official logo!
+   ```bash
+   ./installation.sh
+   ```
+
+3. **Updating later:**
+   Whenever you want to check for updates in the future, simply run:
    ```bash
    ./update.sh
    ```
 
-3. **What to expect:**
+4. **What to expect:**
    - The script will scrape the latest version from Google's servers.
    - It will check if you already have the latest version installed.
    - If an update is needed, it will securely download and extract the tarball to a temporary directory.
