@@ -47,6 +47,30 @@ While building this automation script, I overcame several interesting technical 
    - If an update is needed, it will securely download and extract the tarball to a temporary directory.
    - You will be prompted for your `sudo` password **only once** at the very end to seamlessly replace the old installation in `/usr/share/antigravity`.
 
+## 🩺 Troubleshooting
+
+### App launches with a blank, transparent, or flickering window
+This is a known Electron + Wayland compatibility issue on some Linux setups. To fix it, open your desktop shortcut file and add `--ozone-platform=x11` to the `Exec` line:
+
+```bash
+# Edit the desktop shortcut
+nano ~/.local/share/applications/antigravity.desktop
+```
+
+Change the `Exec` line to:
+```
+Exec=/usr/share/antigravity/antigravity --ozone-platform=x11 %U
+```
+
+Then save and reload the launcher:
+```bash
+update-desktop-database ~/.local/share/applications
+```
+
+This forces Antigravity to run under X11/XWayland mode, which is more stable on older systems or mixed X11/Wayland setups.
+
+---
+
 ## 🤝 Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
