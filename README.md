@@ -47,6 +47,14 @@ While building this automation script, I overcame several interesting technical 
    - If an update is needed, it will securely download and extract the tarball to a temporary directory.
    - You will be prompted for your `sudo` password **only once** at the very end to seamlessly replace the old installation in `/usr/share/antigravity`.
 
+## 🗑️ Uninstallation
+
+If you ever need to completely remove Antigravity from your system, simply run the included uninstaller script:
+```bash
+./uninstall.sh
+```
+This will cleanly remove the system files from `/usr/share/antigravity`, delete the downloaded icon, and remove all Desktop and Application Menu shortcuts.
+
 ## 🩺 Troubleshooting
 
 ### App launches with a blank, transparent, or flickering window
