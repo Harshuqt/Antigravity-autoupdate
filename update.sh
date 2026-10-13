@@ -7,19 +7,23 @@ echo "======================================"
 echo " Antigravity Autoupdater (Linux x64)  "
 echo "======================================"
 
-# 1. Fetch Latest Link
+# 1. Fetch Latest Version
 echo "[1/5] Fetching latest download link..."
 PAGE_URL="https://antigravity.google/download"
-DOWNLOAD_URL=$(curl -s --compressed "$PAGE_URL" | grep -oP 'https://[^"]*linux-x64/Antigravity\.tar\.gz' | head -n 1)
 
-if [ -z "$DOWNLOAD_URL" ]; then
-    echo "Error: Could not find the download link on $PAGE_URL."
+# Extract the version string (e.g. "2.23.0-5238607586394112") directly from the page.
+# This is more robust than matching the full URL, since the page now builds URLs via JS templates.
+LATEST_VERSION=$(curl -s --compressed "$PAGE_URL" | grep -oP 'antigravity-hub/\K[0-9]+\.[0-9]+\.[0-9]+-[0-9]+' | sort -u | head -n 1)
+
+if [ -z "$LATEST_VERSION" ]; then
+    echo "Error: Could not determine the latest version from $PAGE_URL."
     exit 1
 fi
 
-echo "Found latest version link: $DOWNLOAD_URL"
+DOWNLOAD_URL="https://storage.googleapis.com/antigravity-public/antigravity-hub/${LATEST_VERSION}/linux-x64/Antigravity.tar.gz"
 
-LATEST_VERSION=$(echo "$DOWNLOAD_URL" | grep -oP 'antigravity-hub/\K[^/]+')
+echo "Found latest version: $LATEST_VERSION"
+
 INSTALLED_VERSION_FILE="/usr/share/antigravity/installed_version.txt"
 
 if [ -f "$INSTALLED_VERSION_FILE" ]; then
